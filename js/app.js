@@ -15,7 +15,7 @@
 // QUESTIONS : Quel identifiant correspond au catalogue ? Au prix total ?
 // TODO : créez ici des constantes explicites pour les éléments nécessaires.
 // ÉCRIVEZ VOTRE CODE ICI :
-
+const filmsContainer = document.getElementById("films-container");
 
 // ==================================================
 // 0 BIS - MÉMORISER L'ÉTAT DE L'APPLICATION
@@ -39,7 +39,12 @@
 // PISTE : ajoutez l'identifiant du film dans un attribut data-film-id du bouton.
 // MODÈLE : observez l'élément <article data-film-id="1"> dans index.html.
 // ÉCRIVEZ VOTRE CODE ICI :
-
+    films.forEach(film => {
+        filmsContainer.innerHTML += `<article class="overflow-hidden rounded-2xl border border-red-400 bg-white shadow-xl ring-2 ring-red-100" data-film-id="1">
+          <div class="relative"><img src="${film.affiche}" alt="${film.description}" class="aspect-[2/3] w-full object-cover"><span class="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-extrabold shadow-lg">${film.prix} DH</span></div>
+          <div class="p-4"><p class="text-xs font-bold uppercase tracking-wider text-cine-red">${film.genre}</p><h3 class="mt-1 text-lg font-black">${film.titre}</h3><p class="mt-2 text-sm text-slate-500">${film.duree} min</p><button type="button" class="mt-4 w-full rounded-xl bg-cine-red px-4 py-3 font-extrabold text-white">Sélectionné</button></div>
+        </article>`
+    })
 
 // ==================================================
 // US02 - SÉLECTIONNER UN FILM
