@@ -19,6 +19,7 @@
 
 const filmsContainer = document.getElementById("films-container");
 const filmDetails = document.getElementById("film-details");
+const seanceContainer = document.getElementById("seances-container");
 
 
 
@@ -47,7 +48,7 @@ const filmDetails = document.getElementById("film-details");
     films.forEach(film => {
         filmsContainer.innerHTML += `<article class="overflow-hidden rounded-2xl border border-red-400 bg-white shadow-xl ring-2 ring-red-100" data-film-id="1">
           <div class="relative"><img src="${film.affiche}" alt="${film.description}" class="aspect-[2/3] w-full object-cover"><span class="absolute bottom-3 right-3 rounded-full bg-white/95 px-3 py-1 text-xs font-extrabold shadow-lg">${film.prix} DH</span></div>
-          <div class="p-4"><p class="text-xs font-bold uppercase tracking-wider text-cine-red">${film.genre}</p><h3 class="mt-1 text-lg font-black">${film.titre}</h3><p class="mt-2 text-sm text-slate-500">${film.duree} min</p><button type="button" class="mt-4 w-full rounded-xl bg-cine-red px-4 py-3 font-extrabold text-white" id="${film.id}">Sélectionné</button></div>
+          <div class="p-4"><p class="text-xs font-bold uppercase tracking-wider text-cine-red">${film.genre}</p><h3 class="mt-1 text-lg font-black">${film.titre}</h3><p class="mt-2 text-sm text-slate-500">${(film.duree / 60).toFixed(0)} h ${film.duree % 60} min</p><button type="button" class="mt-4 w-full rounded-xl bg-cine-red px-4 py-3 font-extrabold text-white" id="${film.id}">Sélectionné</button></div>
         </article>`
     })
 
@@ -64,22 +65,23 @@ const filmDetails = document.getElementById("film-details");
 // ÉCRIVEZ VOTRE CODE ICI :
 
  filmsContainer.addEventListener("click",boutonid => {
-    console.log(films.find(filmid => 1))
+
     const filmcontent = films.find(filmid => filmid.id === Number(boutonid.target.id))
     if(filmcontent) {
             if(document.getElementById(`film-${filmcontent.id}`)){
                 return;
             }
+                
                 filmDetails.innerHTML += `<img src="${filmcontent.affiche}" alt="${filmcontent.titre}" class="aspect-[2/3] w-24 rounded-xl object-cover shadow-md" id="film-${filmcontent.id}">
               <div><div class="flex flex-wrap items-center gap-2">
 			  <h3 class="text-xl font-black">${filmcontent.titre}</h3>
-			  <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700" id="${filmcontent.id}">${filmcontent.prix}</span></div>
-			  <p class="mt-2 text-sm font-semibold text-slate-500">${filmcontent.titre} · ${filmcontent.duree} min</p>
-			  
+			  <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700" id="${filmcontent.id}">${filmcontent.prix} DH</span></div>
+			  <p class="mt-2 text-sm font-semibold text-slate-500">${filmcontent.titre} · ${(filmcontent.duree / 60).toFixed(0)} min ${filmcontent.duree % 60} min</p>			  
 			  <p class="mt-3 leading-7 text-slate-600">${filmcontent.description}</p></div>`
 
+              filmcontent.seances.forEach(film => seanceContainer.innerHTML += `<button film-${filmcontent.id} type="button" data-seance-id="${film.id}" class="rounded-xl bg-cine-red px-5 py-3 font-bold text-white shadow-md">${film.horaire}</button>`)
+
     }
-    
  })
 
 // ==================================================
@@ -91,6 +93,7 @@ const filmDetails = document.getElementById("film-details");
 // TODO : créer un bouton par séance et conserver son id dans data-seance-id.
 // MODÈLE : les trois boutons statiques de #seances-container montrent le HTML attendu.
 // ÉCRIVEZ VOTRE CODE ICI :
+
 
 
 // ==================================================
